@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Django Wrapper | FusionCharts</title>
+    {% load static %}
+    <script
+      type="text/javascript"
+      src="{% static 'js/fusioncharts.js' %}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{% static 'js/themes/fusioncharts.theme.fint.js' %}"
+    ></script>
+    <style type="text/css">
+    svg > g[class^="raphael-group-"] > text{
+    display: none;
+}
+</style>
+  </head>
+  <body>
+    <!-- FusionCharts will render here-->
+    <div id="chart-1"></div>
+    <!-- dumping JavaScript code here -->
+    {{ output|safe }}
+  </body>
+</html>

@@ -1,0 +1,70 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <title>Yukina - Hydroponic Dashboard</title>
+
+        {% block meta %}
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta content="Dashboard IoT untuk Kebun Hidroponik." name="description" />
+            <meta content="Aldion" name="author" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        {% endblock %}
+
+        {% block css %}
+            <!-- DataTables -->
+            <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css"/>
+            <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css"/>
+
+            <!-- Icons css -->
+            <link href="{% static 'libs/@mdi/font/css/materialdesignicons.min.css' %}" rel="stylesheet" type="text/css" />
+            <link href="{% static 'libs/dripicons/webfont/webfont.css' %}" rel="stylesheet" type="text/css" />
+            <link href="{% static 'libs/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css" />
+
+            <!-- App css -->
+            <!-- build:css -->
+            <link href="{% static 'css/app.css' %}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            {% include 'include/__header.html' %}
+            {% include 'include/__navbar.html' %}
+
+            <!-- Page Content Start -->
+            <div class="content-page">
+                <div class="content">
+                    <div class="container-fluid">
+                        {% block breadcrumb %} {% endblock %}
+
+                        {% block content %} {% endblock %}
+                    </div>
+                </div>
+            </div>
+            <!-- End Page Content-->
+
+            <!-- Footer -->
+            {% include 'include/__footer.html' %}
+            <!-- End Footer -->
+
+        </div>
+        <!-- End #wrapper -->
+        {% block javascript %}
+            <!-- jQuery  -->
+            <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+            <script src="{% static 'libs/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+            <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+
+            <!-- App js -->
+            <script src="{% static 'js/jquery.core.js' %}"></script>
+            <script src="{% static 'js/jquery.app.js' %}"></script>
+        {% endblock %}
+    
+    </body>
+</html>
