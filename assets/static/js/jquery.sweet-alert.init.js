@@ -138,17 +138,15 @@ File: Sweet Alerts
         //custom html alert
         $('#custom-html-alert').click(function () {
             swal({
-                title: '<i>HTML</i> <u>example</u>',
+                title: 'Pencampur Nutrisi',
                 type: 'info',
-                html: 'You can use <b>bold text</b>, ' +
-                '<a href="//coderthemes.com/">links</a> ' +
-                'and other HTML tags',
+                html: 'Apakah Anda Ingin menyalakan Pencampur Nutrisi ?',
                 showCloseButton: true,
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-confirm mt-2',
                 cancelButtonClass: 'btn btn-cancel ml-2 mt-2',
-                confirmButtonText: '<i class="mdi mdi-thumb-up-outline"></i> Great!',
-                cancelButtonText: '<i class="mdi mdi-thumb-down-outline"></i>'
+                confirmButtonText: '<a href="#" style="color:white !important"><i class="mdi mdi mdi-check"></i> Aktifkan</a>',
+                cancelButtonText: '<a href="#" style="color:white !important"><i class="mdi mdi-cancel"></i> Batal</a>'
             })
         });
 

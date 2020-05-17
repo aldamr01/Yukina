@@ -1,0 +1,88 @@
+{% extends 'include/__main.html' %}
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <!-- Sweet Alert css -->
+    <link href="{% static 'libs/sweetalert2/sweetalert2.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'libs/jquery-knob/jquery.knob.min.js' %}"></script>
+    <!-- Sweet Alert Js  -->
+    <script src="{% static 'libs/sweetalert2/sweetalert2.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sweet-alert.init.js' %}"></script>
+
+{% endblock %}
+
+{% block breadcrumb %}
+    <div class="page-title-box">
+        <ol class="breadcrumb float-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Akun</a></li>
+            <li class="breadcrumb-item active">Pengaturan Akun</li>
+        </ol>
+        <h4 class="page-title">Pengaturan Akun</h4>
+    </div>
+{% endblock  %}
+
+{% block content %}
+    <div class="row">
+        
+        <div class="col-lg-6 ">
+            <div class="card-box bx-shadow-lg">
+                <h4 class="m-t-0 header-title">Pengaturan Akun Pengguna</h4>
+                <p>Form untuk mengkustomisasi data pada akun</p>
+                <hr>
+                
+                <form action="#">
+                    <div class="form-group">
+                        <label for="userName">Username<span class="text-danger">*</span></label>
+                        <input type="text" name="username" parsley-trigger="change" required
+                                placeholder="Username Pengguna" class="form-control" id="userName">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress">Alamat Email<span class="text-danger">*</span></label>
+                        <input type="email" name="email" parsley-trigger="change" required
+                                placeholder="Alamat Email" class="form-control" id="emailAddress">
+                    </div>                    
+                    <div class="form-group">
+                        <label for="firstname">Nama Depan<span class="text-danger">*</span></label>
+                        <input type="text" name="first_name" parsley-trigger="change" required
+                                placeholder="Nama Depan" class="form-control" id="firstname">
+                    </div>  
+                    <div class="form-group">
+                        <label for="lastname">Nama Belakang<span class="text-danger">*</span></label>
+                        <input type="text" name="last_name" parsley-trigger="change" required
+                                placeholder="Nama Belakang" class="form-control" id="lastname">
+                    </div>  
+                    <div class="form-group text-right m-b-0">
+                        <button class="btn btn-primary waves-effect waves-light" type="submit">
+                            Simpan Perubahan
+                        </button>
+                        <button type="reset" class="btn btn-light waves-effect m-l-5">
+                            Cancel
+                        </button>
+                    </div>
+
+                </form>
+            </div> <!-- end card-box -->
+        </div>
+
+
+        <div class="col-xl-6">            
+            <div class="card-box bx-shadow-lg">
+                <h4 class="m-t-0 header-title">Konfigurasi Password Akun</h4>
+                <p>Untuk mengubah password pada akun anda, silahkan klik tombol berikut</p>
+                <hr>
+                
+                <a href="{% url 'dashboard:password_configuration' %}" style="color:white;" class="btn btn-success">
+                    <i class="mdi mdi-lock"></i>
+                    Ganti Password
+                </a>
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+
+    <!-- end row -->
+    </div>
+{% endblock %}

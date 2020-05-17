@@ -1,0 +1,145 @@
+{% extends 'include/__main.html' %}
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <style type="text/css">
+        svg > g[class^="raphael-group-"] > text{
+            display: none;
+        }
+    </style>
+    <script type="text/javascript"src="{% static 'js/fusioncharts.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/themes/fusioncharts.theme.fint.js' %}"></script>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    
+{% endblock %}
+
+{% block breadcrumb %}
+    <div class="page-title-box">
+        <ol class="breadcrumb float-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+            <li class="breadcrumb-item active">Monitoring Kebun</li>
+        </ol>
+        <h4 class="page-title">Monitoring Kebun</h4>
+    </div>
+{% endblock  %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xl-3">
+
+            <div class="card-box gradient-danger bx-shadow-lg">
+
+                <div class="widget-chart-one-content text-center">
+                    <h4 align="left" class="text-white mb-0 mt-2"><strong>Suhu Udara</strong></h4>
+                    <h2 class="text-white">12%</h2>
+                    <p class="text-white mb-0 mt-2">tidak normal</p>
+                </div>
+            </div> <!-- end card-box-->
+
+        </div> <!-- end col -->
+
+        <div class="col-xl-3">
+
+            <div class="card-box gradient-success bx-shadow-lg">
+
+                <div class="widget-chart-one-content text-center">
+                    <h4 align="left" class="text-white mb-0 mt-2"><strong>Suhu Air Nutrisi</strong></h4>
+                    <h2 class="text-white">26%</h2>
+                    <p class="text-white mb-0 mt-2">normal</p>
+                </div>
+            </div> <!-- end card-box-->
+
+        </div> <!-- end col -->
+
+        <div class="col-xl-3">
+
+            <div class="card-box gradient-success bx-shadow-lg">
+
+                <div class="widget-chart-one-content text-center">
+                    <h4 align="left" class="text-white mb-0 mt-2"><strong>pH Air</strong></h4>
+                    <h2 class="text-white">7.2</h2>
+                    <p class="text-white mb-0 mt-2">normal</p>
+                </div>
+            </div> <!-- end card-box-->
+
+        </div> <!-- end col -->
+
+        <div class="col-xl-3">
+
+            <div class="card-box gradient-danger bx-shadow-lg">
+
+                <div class="widget-chart-one-content text-center">
+                    <h4 align="left" class="text-white mb-0 mt-2"><strong>PPM Air</strong></h4>
+                    <h2 class="text-white">1200</h2>
+                    <p class="text-white mb-0 mt-2">tidak normal</p>
+                </div>
+            </div> <!-- end card-box-->
+
+        </div> <!-- end col -->
+
+    </div>
+    <!-- end row -->
+
+    <div class="row">
+        <div class="col-xl-3">
+        </div> <!-- end col -->
+
+        <div class="col-xl-3">
+
+            <div class="card-box gradient-success bx-shadow-lg">
+
+                <div class="widget-chart-one-content text-center">
+                    <h4 align="left" class="text-white mb-0 mt-2"><strong>Estimasi Sisa Nutrisi</strong></h4>
+                    <h2 class="text-white">200 ml</h2>
+                    <p class="text-white mb-0 mt-2">normal</p>
+                </div>
+            </div> <!-- end card-box-->
+
+        </div> <!-- end col -->
+
+        <div class="col-xl-3">
+
+            <div class="card-box gradient-success bx-shadow-lg">
+
+                <div class="widget-chart-one-content text-center">
+                    <h4 align="left" class="text-white mb-0 mt-2"><strong>Kelembaban Udara</strong></h4>
+                    <h2 class="text-white">70%</h2>
+                    <p class="text-white mb-0 mt-2">normal</p>
+                </div>
+            </div> <!-- end card-box-->
+
+        </div> <!-- end col -->
+
+        <div class="col-xl-3">
+        </div> <!-- end col -->
+
+    </div>
+    <!-- end row -->
+
+    <div class="row">
+        <div class="col-xl-6">
+
+            <div class="card-box bx-shadow-lg">
+                <div id="chart-1"></div>
+                <!-- dumping JavaScript code here -->
+                {{ output|safe }}
+            </div> <!-- end card-box-->
+
+        </div> <!-- end col -->
+
+        <div class="col-xl-6">
+
+            <div class="card-box bx-shadow-lg">
+                <div id="chart-2"></div>
+                <!-- dumping JavaScript code here -->
+                {{ output2|safe }}
+            </div> <!-- end card-box-->
+
+        </div> <!-- end col -->
+    <!-- end row -->
+    </div>
+{% endblock %}

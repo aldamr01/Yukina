@@ -1,0 +1,132 @@
+{% extends 'include/__main.html' %}
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <!-- Sweet Alert css -->
+    <link href="{% static 'libs/sweetalert2/sweetalert2.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'libs/jquery-knob/jquery.knob.min.js' %}"></script>
+    <!-- Sweet Alert Js  -->
+    <script src="{% static 'libs/sweetalert2/sweetalert2.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sweet-alert.init.js' %}"></script>
+
+{% endblock %}
+
+{% block breadcrumb %}
+    <div class="page-title-box">
+        <ol class="breadcrumb float-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+            <li class="breadcrumb-item active">Pengaturan Kebun</li>
+        </ol>
+        <h4 class="page-title">Pengaturan Kebun</h4>
+    </div>
+{% endblock  %}
+
+{% block content %}
+    <div class="row">
+        
+        <div class="col-lg-6 ">
+            <div class="card-box bx-shadow-lg">
+                <h4 class="m-t-0 header-title">Konfigurasi Nilai Ideal Kondisi Tanaman</h4>
+                <p>Form untuk menyetel nilai ideal monitoring pada tanaman hidroponik</p>
+                <hr>
+                
+                <table class="table table-bordered mb-0">
+                    <thead>                    
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Nilai Minimal</th>
+                            <th>Nilai Maksimal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nutrisi Air</td>
+                            <td><input type="number" clas="form-control" name="min-tds"></td>
+                            <td><input type="number" clas="form-control" name="max-tds"></td>
+                        </tr>
+                        <tr>
+                            <td>Keasaman Air</td>
+                            <td><input type="number" clas="form-control" name="min-ph"></td>
+                            <td><input type="number" clas="form-control" name="max-ph"></td>
+                        </tr>
+                        <tr>
+                            <td>Suhu Udara</td>
+                            <td><input type="number" clas="form-control" name="min-airtempt"></td>
+                            <td><input type="number" clas="form-control" name="max-airtempt"></td>
+                        </tr>
+                        <tr>
+                            <td>Suhu Air</td>
+                            <td><input type="number" clas="form-control" name="min-watertempt"></td>
+                            <td><input type="number" clas="form-control" name="max-watertempt"></td>
+                        </tr>
+                        <tr>
+                            <td>Kelembaban Udara</td>
+                            <td><input type="number" clas="form-control" name="min-humidity"></td>
+                            <td><input type="number" clas="form-control" name="max-humidity"></td>
+                        </tr>                    
+                    </tbody>
+                </table>
+                <br>
+                <button class="btn btn-success" type="submit">
+                    <i class="mdi mdi-content-save"> </i>Simpan Perubahan
+                </button>
+                <button class="btn btn-warning" type="reset">
+                    <i class="mdi mdi-reload"> </i>Reset Nilai
+                </button>
+            </div> <!-- end card-box -->
+        </div>
+
+
+        <div class="col-xl-6">            
+            <div class="card-box bx-shadow-lg">
+                <h4 class="m-t-0 header-title">Konfigurasi Nilai Ideal Kondisi Tanaman Saat Ini</h4>
+                <p>Form untuk menyetel nilai ideal monitoring pada tanaman hidroponik</p>
+                <hr>
+                
+                <table class="table table-bordered mb-0">
+                    <thead>                    
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Nilai Minimal</th>
+                            <th>Nilai Maksimal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nutrisi Air</td>
+                            <td><p align="center">1115 PPM</p></td>
+                            <td><p align="center">1250 PPM</p></td>
+                        </tr>
+                        <tr>
+                            <td>Keasaman Air</td>
+                            <td><p align="center">7.1 pH</p></td>
+                            <td><p align="center">8 pH</p></td>
+                        </tr>
+                        <tr>
+                            <td>Suhu Udara</td>
+                            <td><p align="center">25 °C</p></td>
+                            <td><p align="center">40 °C</p></td>
+                        </tr>
+                        <tr>
+                            <td>Suhu Air</td>
+                            <td><p align="center">18 °C</p></td>
+                            <td><p align="center">27 °C</p></td>
+                        </tr>
+                        <tr>
+                            <td>Kelembaban Udara</td>
+                            <td><p align="center">50 %</p></td>
+                            <td><p align="center">70 %</p></td>
+                        </tr>                    
+                    </tbody>
+                </table>                
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+
+    <!-- end row -->
+    </div>
+{% endblock %}
