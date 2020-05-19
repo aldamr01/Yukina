@@ -18,10 +18,10 @@ MASTER_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASE_DIR    = os.path.join(MASTER_BASE_DIR, 'db')
 # PROJECT_ROOT    = os.path.dirname(__file__)
 BASE_DIR        = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-TEMPLATE_DIR    = os.path.join(MASTER_BASE_DIR,'templates')
+TEMPLATE_DIR    = os.path.join(BASE_DIR,'templates')
 
 ALLOWED_HOSTS               = ['*'] #Dev is '*'
-DEBUG_PROPAGATE_EXCEPTIONS  = True #Dev is False
+DEBUG_PROPAGATE_EXCEPTIONS  = False #Dev is False
 DEBUG                       = True #Dev is False
 CORS_ORIGIN_ALLOW_ALL       = True
 CORS_ALLOW_CREDENTIALS      = True
@@ -62,7 +62,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'allauth',
     'rest_framework',
-    'app.fusioncharts'
+    'app.fusioncharts',
+    'app.authentication',
+    'app.dashboard'
 ]
 
 MIDDLEWARE = [
