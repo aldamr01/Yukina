@@ -40,9 +40,22 @@
                                     <div class="account-logo-box">
                                         <h2 class="text-uppercase text-center">
                                             <a href="index.html" class="text-success">
-                                                <span><img src="assets/images/logo.png" alt="" height="28"></span>
+                                                <span><img src="{% static 'images/logo.png' %}" alt="" height="28"></span>
                                             </a>
                                         </h2>
+                                        <br>
+                                        {% if messages %}
+                                            {% for message in messages %}
+
+                                            <div class="alert alert-dismissible bg-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} text-white border-0 fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong></strong> {{ message }}
+                                            </div>
+
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
 
                                     <div class="account-content">
@@ -50,7 +63,7 @@
                                             {% csrf_token %}
                                             <div class="form-group mb-3">
                                                 <label for="emailaddress" class="font-weight-medium">Email address</label>
-                                                <input name="email" class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
+                                                <input name="username" class="form-control" type="text" id="emailaddress" required="" placeholder="Enter your email">
                                             </div>
 
                                             <div class="form-group mb-3">

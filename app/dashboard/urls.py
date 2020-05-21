@@ -1,5 +1,10 @@
+# Django
 from app.dashboard.app_views import dashboard
-from django.urls import path
+from django.urls import path, include
+
+# Application
+from app.dashboard.api import dashboard as api
+from app.dashboard.app_views import dashboard
 
 app_name = 'dashboard'
 urlpatterns = [
@@ -8,4 +13,10 @@ urlpatterns = [
     path('garden-config', dashboard.garden_configuration, name='garden_configuration'),
     path('account-config', dashboard.account_configuration, name='account_configuration'),
     path('password-config', dashboard.password_configuration, name='password_configuration'),
+    
+    path('api/', include(([
+        path('v1/', include(([
+            path('currentvalue/', api.CurrentSensorValue.as_view(), name="currentvalue"),
+        ], 'v1'), namespace='v1')),
+    ], 'api'), namespace='api')),
 ]

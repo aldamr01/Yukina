@@ -6,6 +6,9 @@ from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+# Project
+from app.authentication.app_forms.authentication import AuthenticationForm
+
 
 @require_http_methods(['GET', 'POST'])
 def signin(request):
@@ -23,9 +26,9 @@ def signin(request):
                         request.session['user_id'] = user.id                        
                         return redirect('dashboard:garden_monitoring')
                     else:
-                        messages.add_message(request, messages.ERROR, 'Akun anda telah di cekal!, silahkan hubungi bagian bagian administrasi.')
+                        messages.add_message(request, messages.ERROR, 'Akun anda telah dinonaktifkan!')
                 else:
-                    messages.add_message(request, messages.WARNING, 'Password atau Nomor Induk tidak cocok!')
+                    messages.add_message(request, messages.ERROR, 'Password atau Username tidak cocok!')
             else:
                 messages.add_message(request, messages.WARNING, 'Silahkan isi dengan lengkap form dibawah!')
         return render(request, template_name='base/authentication/signin.html')

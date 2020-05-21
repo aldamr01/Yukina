@@ -19,7 +19,7 @@ DATABASE_DIR    = os.path.join(MASTER_BASE_DIR, 'db')
 # PROJECT_ROOT    = os.path.dirname(__file__)
 BASE_DIR        = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TEMPLATE_DIR    = os.path.join(BASE_DIR,'templates')
-
+SITE_ID         = 1
 ALLOWED_HOSTS               = ['*'] #Dev is '*'
 DEBUG_PROPAGATE_EXCEPTIONS  = False #Dev is False
 DEBUG                       = True #Dev is False
@@ -54,13 +54,14 @@ CORS_ALLOW_HEADERS = (
 )
 
 INSTALLED_APPS = [
+    'django_extensions',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'allauth',
     'rest_framework',
     'app.fusioncharts',
     'app.authentication',
@@ -155,11 +156,10 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 STATICFILES_DIRS = [   
-    os.path.join(MASTER_BASE_DIR, 'assets/static/'),
+    os.path.join(BASE_DIR, 'assets/static/'),
 ]
 
 MEDIAFILES_DIRS = os.path.join(BASE_DIR, 'assets/media/')
@@ -185,12 +185,12 @@ USE_I18N                        = True
 USE_L10N                        = True
 USE_TZ                          = False
 
-STATIC_ROOT                     = '/statics/'
+STATIC_ROOT                     = '/assets/static/'
 MEDIA_ROOT                      = 'assets/media/'
 STATIC_URL                      = '/static/'
 MEDIA_URL                       = '/media/'
-LOGIN_URL                       = '/authentication/signin'
-LOGOUT_URL                      = '/authentication/signout'
+LOGIN_URL                       = '/signin'
+LOGOUT_URL                      = '/signout'
 LOGOUT_REDIRECT_URL             = '/'
 LOGIN_REDIRECT_URL              = '/'
 

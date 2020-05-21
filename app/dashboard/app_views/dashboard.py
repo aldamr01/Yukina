@@ -1,18 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
-# Include the fusioncharts.py file which has required functions to embed the charts in html page
+# Library
 from app.fusioncharts.fusioncharts import FusionCharts
 from app.fusioncharts.fusioncharts import FusionTable
 from app.fusioncharts.fusioncharts import TimeSeries
 import requests
 
-# Loading Data and schema from a Static JSON String url
-# The chart method is defined to load chart data from an JSON string.
+# Application
+from app.dashboard.app_models.dashboard import SensorConfig, SensorValue, NutrientValue, SensorCurrentValue
 
+
+@login_required
 def garden_monitoring(request):
 
-   data = '[["01-Feb-11",8866],["02-Feb-11",2174],["03-Feb-11",2084],["04-Feb-11",1503],["05-Feb-11",4928],["06-Feb-11",4667],["07-Feb-11",1064],["08-Feb-11",851],["09-Feb-11",7326]]'
+   data = '[["01-Feb-11",8866],["02-Feb-11",2174],["03-Feb-11",2084]'
    schema = '[{"name": "Time","type": "date","format": "%d-%b-%y"}, {"name": "Nilai PPM","type": "number"}]'
 
    fusionTable = FusionTable(schema, data)
@@ -27,21 +30,25 @@ def garden_monitoring(request):
    # Create an object for the chart using the FusionCharts class constructor
    fcChart = FusionCharts("timeseries", "ex1", 700, 450, "chart-1", "json", timeSeries)
    fcChart2 = FusionCharts("timeseries", "ex2", 700, 450, "chart-2", "json", timeSeries)
-
-   # returning complete JavaScript and HTML code, which is used to generate chart in the browsers.
+   
+      
    return  render(request, 'base/dashboard/garden_monitoring.html', {'output' : fcChart.render(),
                                                             'output2' : fcChart2.render()})
    
-
+   
+@login_required
 def garden_control(request):
    # return render(request, 'base/dashboard/garden_control.html')
-   return render(request, 'base/authentication/garden_control.html')
+   return render(request, 'base/dashboard/garden_control.html')
 
+@login_required
 def garden_configuration(request):
    return render(request, 'base/dashboard/garden_configuration.html')
 
+@login_required
 def account_configuration(request):
    return render(request, 'base/dashboard/account_configuration.html')
 
+@login_required
 def password_configuration(request):
    return render(request, 'base/dashboard/password_configuration.html')
