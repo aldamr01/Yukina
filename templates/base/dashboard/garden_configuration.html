@@ -129,28 +129,28 @@
                     <tbody>
                         <tr>
                             <td>Nutrisi Air</td>
-                            <td><p align="center">1115 PPM</p></td>
-                            <td><p align="center">1250 PPM</p></td>
+                            <td><p align="center">{{ sensor_config.min_tds }} PPM</p></td>
+                            <td><p align="center">{{ sensor_config.max_tds }} PPM</p></td>
                         </tr>
                         <tr>
                             <td>Keasaman Air</td>
-                            <td><p align="center">7.1 pH</p></td>
-                            <td><p align="center">8 pH</p></td>
+                            <td><p align="center">{{ sensor_config.min_ph }} pH</p></td>
+                            <td><p align="center">{{ sensor_config.min_ph }} pH</p></td>
                         </tr>
                         <tr>
                             <td>Suhu Udara</td>
-                            <td><p align="center">25 °C</p></td>
-                            <td><p align="center">40 °C</p></td>
+                            <td><p align="center">{{ sensor_config.min_air_temperature }} °C</p></td>
+                            <td><p align="center">{{ sensor_config.min_air_temperature }} °C</p></td>
                         </tr>
                         <tr>
                             <td>Suhu Air</td>
-                            <td><p align="center">18 °C</p></td>
-                            <td><p align="center">27 °C</p></td>
+                            <td><p align="center">{{ sensor_config.min_water_temperature }} °C</p></td>
+                            <td><p align="center">{{ sensor_config.min_water_temperature }} °C</p></td>
                         </tr>
                         <tr>
                             <td>Kelembaban Udara</td>
-                            <td><p align="center">50 %</p></td>
-                            <td><p align="center">70 %</p></td>
+                            <td><p align="center">{{ sensor_config.min_humidity }} %</p></td>
+                            <td><p align="center">{{ sensor_config.min_humidity }} %</p></td>
                         </tr>                    
                     </tbody>
                 </table>                
