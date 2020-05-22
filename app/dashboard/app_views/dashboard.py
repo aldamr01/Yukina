@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 # Library
 from app.fusioncharts.fusioncharts import FusionCharts
@@ -11,7 +12,7 @@ from app.fusioncharts.fusioncharts import TimeSeries
 import requests
 
 # Application
-from app.dashboard.app_models.dashboard import SensorConfig, SensorValue, NutrientValue, SensorCurrentValue
+from app.dashboard.app_models.dashboard import SensorConfig, SensorValue, NutrientValue, SensorCurrentValue, SensorControl
 
 
 @login_required
@@ -66,8 +67,16 @@ def garden_monitoring(request):
    
 @login_required
 def garden_control(request):
-   # return render(request, 'base/dashboard/garden_control.html')
-   return render(request, 'base/dashboard/garden_control.html')
+   nutrient_value = get_object_or_404(NutrientValue, user_id=request.user.id)
+   sensor_control = get_object_or_404(SensorControl, user_id=request.user.id)
+   return render(
+      request, 
+      'base/dashboard/garden_control.html',
+      {
+         'nutrient_value': nutrient_value,
+         'sensor_control': sensor_control
+      }
+   )
 
 @login_required
 def garden_configuration(request):
@@ -80,3 +89,18 @@ def account_configuration(request):
 @login_required
 def password_configuration(request):
    return render(request, 'base/dashboard/password_configuration.html')
+
+@login_required
+def start_mixin(request):
+   sensor_control = SensorControl.objects.get(user_id=request.user.id)
+   if sensor_control.status is True:
+      messages.add_message(request, messages.WARNING, 'pencampur sedang menyala! tunggu beberapa saat lagi')
+   else:
+      sensor_control.status = True
+      sensor_control.pump_nutrient_a = False
+      sensor_control.pump_nutrient_b = False
+      sensor_control.pump_water = False
+      sensor_control.save()
+      messages.add_message(request, messages.WARNING, 'pencampur berhasil dinyalakan!')
+      
+   return redirect('dashboard:garden_control')

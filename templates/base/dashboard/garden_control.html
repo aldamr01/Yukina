@@ -1,4 +1,5 @@
 {% extends 'include/__main.html' %}
+{% load dashboardtags %}
 {% load static %}
 
 {% block css %}
@@ -13,7 +14,7 @@
     <!-- Sweet Alert Js  -->
     <script src="{% static 'libs/sweetalert2/sweetalert2.min.js' %}"></script>
     <script src="{% static 'js/jquery.sweet-alert.init.js' %}"></script>
-
+    <script src="{% static 'js/garden_control.js' %}"></script>
 {% endblock %}
 
 {% block breadcrumb %}
@@ -31,9 +32,15 @@
         <div class="col-md-2 offset-5">
             <p align="center">
                 <strong>Pencampur Nutrisi</strong>
-                <button type="button" class="btn btn-info btn-lg" style="width:150px; height:150px;border-radius:50%" id="custom-html-alert">
-                    Nyalakan!
-                </button>
+                {% if sensor_control.status is True %}
+                    <a id="button_trigger" href="#" class="disabled btn btn-danger btn-lg border-danger" style="padding-top:60px; width:150px; height:150px;border-radius:50%" id="custom-html-alert">
+                        Menyala.
+                    </a>
+                {% else %}
+                    <a id="button_trigger" href="{% url 'dashboard:start_mixin' %}" class="btn btn-info btn-lg" style="padding-top:60px; width:150px; height:150px;border-radius:50%" id="custom-html-alert">
+                        Nyalakan!
+                    </a>
+                {% endif %}
             </p>
         </div>
     </div>
@@ -44,7 +51,7 @@
             <div class="card-box bx-shadow-lg">
                 <h4 class="m-t-0 header-title">Pencampur Nutrisi</h4>
                 <p class="text-muted font-13 m-b-20">
-                    Status pencampur nutrisi : &nbsp;<button class="btn btn-default btn-sm">tidak aktif</button>
+                    Status pencampur nutrisi : &nbsp;<button class="btn btn-default btn-sm" id="status_i">inactive</button>
                 </p>
                 <hr>
                 
@@ -60,17 +67,17 @@
                     <tr>
                         <th scope="row">1</th>
                         <td>Dosing Pump Nutrisi A</td>
-                        <td><button class="btn btn-default" align="center">iddle</button></td>
+                        <td><button class="btn btn-default" align="center" id="pump_nutrient_a">iddle</button></td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>
                         <td>Dosing Pump Nutrisi B</td>
-                        <td><button class="btn btn-default" align="center">iddle</button></td>
+                        <td><button class="btn btn-default" align="center" id="pump_nutrient_b">iddle</button></td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>
                         <td>Water Pump</td>
-                        <td><button class="btn btn-default" align="center">iddle</button></td>
+                        <td><button class="btn btn-default" align="center" id="pump_water">iddle</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -86,7 +93,7 @@
                     <div class="col-md-6">                
                         <div class="card-box text-center">
                             <input data-plugin="knob" data-width="150" data-height="150" data-linecap=round
-                                    data-fgColor="#6b5fb5" value="81" data-skin="tron" data-angleOffset="180"
+                                    data-fgColor="#6b5fb5" value="{{ nutrient_value.value|percentage }}" data-skin="tron" data-angleOffset="180"
                                     data-readOnly=true data-thickness=".1"/>
 
                             <h6 class="text-muted mt-3">Nutrisi B / %</h6>
@@ -95,7 +102,7 @@
                     <div class="col-md-6">
                         <div class="card-box text-center">
                             <input data-plugin="knob" data-width="150" data-height="150" data-linecap=round
-                                    data-fgColor="#6b5fb5" value="80" data-skin="tron" data-angleOffset="180"
+                                    data-fgColor="#6b5fb5" value="{{ nutrient_value.value|percentage }}" data-skin="tron" data-angleOffset="180"
                                     data-readOnly=true data-thickness=".1"/>
 
                             <h6 class="text-muted mt-3">Nutrisi A / %</h6>

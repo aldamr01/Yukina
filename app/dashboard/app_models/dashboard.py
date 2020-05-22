@@ -49,3 +49,14 @@ class NutrientValue(models.Model):
     value = models.IntegerField(null=False, default=500)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    
+
+class SensorControl(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.BooleanField(default=False, null=False)
+    pump_nutrient_a = models.BooleanField(default=False, null=False)
+    pump_nutrient_b = models.BooleanField(default=False, null=False)
+    pump_water = models.BooleanField(default=False, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
