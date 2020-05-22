@@ -28,58 +28,88 @@
 
 {% block content %}
     <div class="row">
+        <div class="col-md-12">
+            {% if messages %}
+                {% for message in messages %}
+
+                <div class="alert alert-dismissible bg-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} text-white border-0 fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong></strong> {{ message }}
+                </div>
+
+                {% endfor %}
+            {% endif %}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
         
         <div class="col-lg-6 ">
             <div class="card-box bx-shadow-lg">
                 <h4 class="m-t-0 header-title">Konfigurasi Nilai Ideal Kondisi Tanaman</h4>
                 <p>Form untuk menyetel nilai ideal monitoring pada tanaman hidroponik</p>
                 <hr>
-                
-                <table class="table table-bordered mb-0">
-                    <thead>                    
-                        <tr>
-                            <th>Parameter</th>
-                            <th>Nilai Minimal</th>
-                            <th>Nilai Maksimal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Nutrisi Air</td>
-                            <td><input type="number" clas="form-control" name="min-tds"></td>
-                            <td><input type="number" clas="form-control" name="max-tds"></td>
-                        </tr>
-                        <tr>
-                            <td>Keasaman Air</td>
-                            <td><input type="number" clas="form-control" name="min-ph"></td>
-                            <td><input type="number" clas="form-control" name="max-ph"></td>
-                        </tr>
-                        <tr>
-                            <td>Suhu Udara</td>
-                            <td><input type="number" clas="form-control" name="min-airtempt"></td>
-                            <td><input type="number" clas="form-control" name="max-airtempt"></td>
-                        </tr>
-                        <tr>
-                            <td>Suhu Air</td>
-                            <td><input type="number" clas="form-control" name="min-watertempt"></td>
-                            <td><input type="number" clas="form-control" name="max-watertempt"></td>
-                        </tr>
-                        <tr>
-                            <td>Kelembaban Udara</td>
-                            <td><input type="number" clas="form-control" name="min-humidity"></td>
-                            <td><input type="number" clas="form-control" name="max-humidity"></td>
-                        </tr>                    
-                    </tbody>
-                </table>
-                <br>
-                <button class="btn btn-success" type="submit">
-                    <i class="mdi mdi-content-save"> </i>Simpan Perubahan
-                </button>
-                <button class="btn btn-warning" type="reset">
-                    <i class="mdi mdi-reload"> </i>Reset Nilai
-                </button>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <table class="table table-bordered mb-0">
+                        <thead>                    
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Nilai Minimal</th>
+                                <th>Nilai Maksimal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nutrisi Air</td>
+                                <td>{{ form.min_tds }}</td>
+                                <td>{{ form.max_tds }}</td>
+                            </tr>
+                            <tr>
+                                <td>Keasaman Air</td>
+                                <td>{{ form.min_ph }}</td>
+                                <td>{{ form.max_ph }}</td>
+                            </tr>
+                            <tr>
+                                <td>Suhu Udara</td>
+                                <td>{{ form.min_air_temperature }}</td>
+                                <td>{{ form.max_air_temperature }}</td>
+                            </tr>
+                            <tr>
+                                <td>Suhu Air</td>
+                                <td>{{ form.min_water_temperature }}</td>
+                                <td>{{ form.max_water_temperature }}</td>
+                            </tr>
+                            <tr>
+                                <td>Kelembaban Udara</td>
+                                <td>{{ form.min_humidity }}</td>
+                                <td>{{ form.max_humidity }}</td>
+                            </tr>                    
+                        </tbody>
+                    </table>
+                    <br>
+                    <button class="btn btn-success" type="submit">
+                        <i class="mdi mdi-content-save"> </i>Simpan Perubahan
+                    </button>                    
+                </form>
             </div> <!-- end card-box -->
         </div>
+        
 
 
         <div class="col-xl-6">            

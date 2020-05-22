@@ -13,7 +13,7 @@ import requests
 
 # Application
 from app.dashboard.app_models.dashboard import SensorConfig, SensorValue, NutrientValue, SensorCurrentValue, SensorControl
-
+from app.dashboard.app_forms.dashboard import SensorConfigUpdateForm
 
 @login_required
 def garden_monitoring(request):
@@ -79,8 +79,25 @@ def garden_control(request):
    )
 
 @login_required
-def garden_configuration(request):
-   return render(request, 'base/dashboard/garden_configuration.html')
+def garden_configuration(request):   
+   sensor_config = get_object_or_404(SensorConfig, user_id=request.user.id)
+   form = SensorConfigUpdateForm(request.POST or None, instance=sensor_config)
+   if request.method == 'POST':
+      if form.is_valid():
+         form.save()
+         messages.add_message(request, messages.SUCCESS, 'berhasil mengubah data konfigurasi') 
+      else:        
+         messages.add_message(request, messages.WARNING, 'gagal mengubah data konfigurasi')
+      return redirect('dashboard:garden_configuration')
+   
+   return render(
+      request, 
+      'base/dashboard/garden_configuration.html',
+      {
+         'sensor_config': sensor_config,
+         'form': form
+      }
+   )
 
 @login_required
 def account_configuration(request):
@@ -101,6 +118,6 @@ def start_mixin(request):
       sensor_control.pump_nutrient_b = False
       sensor_control.pump_water = False
       sensor_control.save()
-      messages.add_message(request, messages.WARNING, 'pencampur berhasil dinyalakan!')
+      messages.add_message(request, messages.SUCCESS, 'pencampur berhasil dinyalakan!')
       
    return redirect('dashboard:garden_control')
