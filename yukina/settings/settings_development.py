@@ -65,7 +65,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'app.fusioncharts',
     'app.authentication',
-    'app.dashboard'
+    'app.dashboard',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -168,7 +169,7 @@ MEDIAFILES_DIRS = os.path.join(BASE_DIR, 'assets/media/')
 MESSAGE_STORAGE                 = 'django.contrib.messages.storage.cookie.CookieStorage'
 STATICFILES_STORAGE             = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 EMAIL_BACKEND                   = 'des.backends.ConfiguredEmailBackend'
-
+CRISPY_TEMPLATE_PACK            = 'bootstrap3'
 ROOT_URLCONF                    = 'yukina.urls'
 WSGI_APPLICATION                = 'yukina.wsgi.application'
 LANGUAGE_CODE                   = 'en-us'

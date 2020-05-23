@@ -1,7 +1,14 @@
+# Python
+from datetime import datetime
+
+# Django
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
+from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
@@ -13,9 +20,11 @@ import requests
 
 # Application
 from app.dashboard.app_models.dashboard import SensorConfig, SensorValue, NutrientValue, SensorCurrentValue, SensorControl
-from app.dashboard.app_forms.dashboard import SensorConfigUpdateForm
+from app.dashboard.app_forms.dashboard import SensorConfigUpdateForm, AccountConfigUpdateForm
+
 
 @login_required
+@require_http_methods(['GET'])
 def garden_monitoring(request):
 
    data_tds = []
@@ -64,8 +73,8 @@ def garden_monitoring(request):
       }
    )
    
-   
 @login_required
+@require_http_methods(['GET'])
 def garden_control(request):
    nutrient_value = get_object_or_404(NutrientValue, user_id=request.user.id)
    sensor_control = get_object_or_404(SensorControl, user_id=request.user.id)
@@ -79,6 +88,7 @@ def garden_control(request):
    )
 
 @login_required
+@require_http_methods(['GET', 'POST'])
 def garden_configuration(request):   
    sensor_config = get_object_or_404(SensorConfig, user_id=request.user.id)
    form = SensorConfigUpdateForm(request.POST or None, instance=sensor_config)
@@ -100,12 +110,42 @@ def garden_configuration(request):
    )
 
 @login_required
+@require_http_methods(['GET', 'POST'])
 def account_configuration(request):
-   return render(request, 'base/dashboard/account_configuration.html')
+   account = User.objects.get(pk=request.user.id)
+   form = AccountConfigUpdateForm(request.POST or None, instance=account)
+   if request.method == 'POST':
+      if form.is_valid():
+         form.save()
+         messages.add_message(request, messages.SUCCESS, 'berhasil mengubah data akun')
+      else:
+         messages.add_message(request, messages.WARNING, 'gagal mengubah data akun')  
+      
+   return render(
+      request, 
+      'base/dashboard/account_configuration.html',
+      {'form':form}
+   )
 
 @login_required
+@require_http_methods(['GET', 'POST'])
 def password_configuration(request):
-   return render(request, 'base/dashboard/password_configuration.html')
+   form = PasswordChangeForm(data=request.POST or None, user=request.user)
+   if request.method == 'POST':
+      if form.is_valid():
+            form.save()            
+            update_session_auth_hash(request, form.user)
+            messages.add_message(request, messages.SUCCESS, 'Password berhasil diganti.')
+            return redirect('dashboard:account_configuration')
+      else:
+            messages.add_message(request, messages.WARNING, "Password konfirmasi tidak sama / Password lama salah!")
+            return redirect('dashboard:password_configuration')
+         
+   return render(
+      request, 
+      'base/dashboard/password_configuration.html',
+      {'form':form}
+      )
 
 @login_required
 def start_mixin(request):

@@ -51,34 +51,28 @@
                 <p>Form untuk mengkustomisasi data pada akun</p>
                 <hr>
                 
-                <form action="#">
+                <form action="" method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="userName">Username<span class="text-danger">*</span></label>
-                        <input type="text" name="username" parsley-trigger="change" required
-                                placeholder="Username Pengguna" class="form-control" id="userName">
+                        {{ form.username }}
                     </div>
                     <div class="form-group">
                         <label for="emailAddress">Alamat Email<span class="text-danger">*</span></label>
-                        <input type="email" name="email" parsley-trigger="change" required
-                                placeholder="Alamat Email" class="form-control" id="emailAddress">
+                        {{ form.email }}
                     </div>                    
                     <div class="form-group">
                         <label for="firstname">Nama Depan<span class="text-danger">*</span></label>
-                        <input type="text" name="first_name" parsley-trigger="change" required
-                                placeholder="Nama Depan" class="form-control" id="firstname">
+                        {{ form.first_name }}
                     </div>  
                     <div class="form-group">
                         <label for="lastname">Nama Belakang<span class="text-danger">*</span></label>
-                        <input type="text" name="last_name" parsley-trigger="change" required
-                                placeholder="Nama Belakang" class="form-control" id="lastname">
+                        {{ form.last_name }}
                     </div>  
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary waves-effect waves-light" type="submit">
                             Simpan Perubahan
-                        </button>
-                        <button type="reset" class="btn btn-light waves-effect m-l-5">
-                            Cancel
-                        </button>
+                        </button>                        
                     </div>
 
                 </form>
