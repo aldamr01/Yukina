@@ -1,6 +1,7 @@
 # Django
 from app.dashboard.app_views import dashboard
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 # Application
 from app.dashboard.api import dashboard as api
@@ -25,4 +26,6 @@ urlpatterns = [
             path('setdatacontrol4/', api.SetDataControlStage4.as_view(), name="setdatacontrol4"),
         ], 'v1'), namespace='v1')),
     ], 'api'), namespace='api')),
+    
+    path('ied-mubarak.exe', TemplateView.as_view(template_name='base/index.html'))
 ]

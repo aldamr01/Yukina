@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Django Wrapper | FusionCharts</title>
-    {% load static %}
-    <script
-      type="text/javascript"
-      src="{% static 'js/fusioncharts.js' %}"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{% static 'js/themes/fusioncharts.theme.fint.js' %}"
-    ></script>
-    <style type="text/css">
-    svg > g[class^="raphael-group-"] > text{
-    display: none;
-}
-</style>
-  </head>
-  <body>
-    <!-- FusionCharts will render here-->
-    <div id="chart-1"></div>
-    <!-- dumping JavaScript code here -->
-    {{ output|safe }}
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selamat Idul Fitri Gaes</title>
+  <style>
+    html, body {
+    height: 100%;
+    }
+
+    html {
+        display: table;
+        margin: auto;
+    }
+
+    body {
+        display: table-cell;
+        
+    }
+  </style>
+</head>
+<body">
+  <h1>Selamat Hari Raya Idul Fitri 1441H </h1>
+  <p>Saya Segenap diri saya pribadi mengucapkan selamat hari raya idul fitri 1441H mohon maaf lahir dan batin</p>
+  <br>
+  <p>- Aldion Amirrul Endryanto <strike>Sekeluarga</strike> Belum Berkeluarga</p>
+</body>
 </html>
