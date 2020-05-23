@@ -19,6 +19,10 @@ urlpatterns = [
         path('v1/', include(([
             path('currentvalue/', api.CurrentSensorValue.as_view(), name="currentvalue"),
             path('sensorcontrol/', api.GetDataControl.as_view(), name="sensorcontrol"),
+            path('setdatacontrol1/', api.SetDataControlStage1.as_view(), name="setdatacontrol1"),
+            path('setdatacontrol2/', api.SetDataControlStage2.as_view(), name="setdatacontrol2"),
+            path('setdatacontrol3/', api.SetDataControlStage3.as_view(), name="setdatacontrol3"),
+            path('setdatacontrol4/', api.SetDataControlStage4.as_view(), name="setdatacontrol4"),
         ], 'v1'), namespace='v1')),
     ], 'api'), namespace='api')),
 ]

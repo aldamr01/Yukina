@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 # Application
-from app.dashboard.app_models.dashboard import SensorCurrentValue, SensorControl
+from app.dashboard.app_models.dashboard import SensorCurrentValue, SensorControl, NutrientValue
 
 class CurrentSensorValue(APIView):
    permission_classes = (IsAuthenticated,)
@@ -46,12 +46,16 @@ class GetDataControl(APIView):
             
 class SetDataControlStage1(APIView):
    
-    def get(self):
+    def get(self, request):
             sensor_control = SensorControl.objects.get(user_id=1)
+            nutrient_value = NutrientValue.objects.get(user_id=1)
+            nutrient_value.value = nutrient_value.value - 25.0
+            nutrient_value.save()
             sensor_control.status = True
             sensor_control.pump_nutrient_a = True
             sensor_control.pump_nutrient_b = False
             sensor_control.pump_water = False
+            sensor_control.save()
             return Response(
                 {
                     'status_code': 200,                                       
@@ -62,12 +66,13 @@ class SetDataControlStage1(APIView):
 
 class SetDataControlStage2(APIView):
    
-    def get(self):
+    def get(self, request):
             sensor_control = SensorControl.objects.get(user_id=1)
             sensor_control.status = True
             sensor_control.pump_nutrient_a = False
             sensor_control.pump_nutrient_b = True
             sensor_control.pump_water = False
+            sensor_control.save()
             return Response(
                 {
                     'status_code': 200,                                       
@@ -78,12 +83,13 @@ class SetDataControlStage2(APIView):
 
 class SetDataControlStage3(APIView):
    
-    def get(self):
+    def get(self, request):
             sensor_control = SensorControl.objects.get(user_id=1)
             sensor_control.status = True
             sensor_control.pump_nutrient_a = False
             sensor_control.pump_nutrient_b = False
             sensor_control.pump_water = True
+            sensor_control.save()
             return Response(
                 {
                     'status_code': 200,                                       
@@ -94,12 +100,13 @@ class SetDataControlStage3(APIView):
 
 class SetDataControlStage4(APIView):
        
-    def get(self):
+    def get(self, request):
             sensor_control = SensorControl.objects.get(user_id=1)
             sensor_control.status = False
             sensor_control.pump_nutrient_a = False
             sensor_control.pump_nutrient_b = False
             sensor_control.pump_water = False
+            sensor_control.save()
             return Response(
                 {
                     'status_code': 200,                                       

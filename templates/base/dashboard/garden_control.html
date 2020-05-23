@@ -48,13 +48,19 @@
         <div class="col-md-2 offset-5">
             <p align="center">
                 <strong>Pencampur Nutrisi</strong>
-                {% if sensor_control.status is True %}
-                    <a id="button_trigger" href="#" class="disabled btn btn-danger btn-lg border-danger" style="padding-top:60px; width:150px; height:150px;border-radius:50%" id="custom-html-alert">
-                        Menyala.
-                    </a>
+                {% if nutrient_value.value > 30 %}
+                    {% if sensor_control.status is True %}
+                        <a id="button_trigger" href="#" class="disabled btn btn-danger btn-lg border-danger" style="padding-top:60px; width:150px; height:150px;border-radius:50%" id="custom-html-alert">
+                            Menyala.
+                        </a>
+                    {% else %}
+                        <button class="btn btn-info btn-lg" style="width:150px; height:150px;border-radius:50%" id="custom-html-alert">
+                            Nyalakan!
+                        </button>
+                    {% endif %}
                 {% else %}
-                    <a id="button_trigger" href="{% url 'dashboard:start_mixin' %}" class="btn btn-info btn-lg" style="padding-top:60px; width:150px; height:150px;border-radius:50%" id="custom-html-alert">
-                        Nyalakan!
+                    <a id="button_trigger" href="#" class="disabled btn btn-danger btn-lg border-danger" style="padding-top:60px; width:150px; height:150px;border-radius:50%" id="custom-html-alert">
+                        Nutrisi habis
                     </a>
                 {% endif %}
             </p>
