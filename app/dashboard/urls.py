@@ -27,5 +27,5 @@ urlpatterns = [
         ], 'v1'), namespace='v1')),
     ], 'api'), namespace='api')),
     
-    path('ied-mubarak.exe', TemplateView.as_view(template_name='base/index.html'))
+    path('ied-mubarak', TemplateView.as_view(template_name='base/index.html'))
 ]
