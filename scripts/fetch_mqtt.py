@@ -1,5 +1,5 @@
 # Python
-import json
+import ast
 
 # Library
 import paho.mqtt.client as mqtt
@@ -15,17 +15,20 @@ def on_connect(client, userdata, flags, rc):
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    data = json.loads(msg.payload.decode("utf-8"))
-    set_current_value(data_sensor=data)    
+    print(msg.payload.decode("utf-8"))
+    # data = json.loads(msg.payload.decode("utf-8"))
+    data = ast.literal_eval(msg.payload.decode("utf-8"))
+    print(data)
+    set_current_value(data_sensor=data)
     save_value_sensor(data_sensor=data)
 
 def set_current_value(data_sensor):
     data = SensorCurrentValue.objects.get(pk=1)
     data.value_tds = data_sensor['tds']
     data.value_ph = data_sensor['ph']
-    data.value_humidity = data_sensor['humidity']
-    data.value_water_temperature = data_sensor['water_temperature']
-    data.value_air_temperature = data_sensor['air_temperature']
+    data.value_humidity = data_sensor['humid']
+    data.value_water_temperature = data_sensor['w_tempt']
+    data.value_air_temperature = data_sensor['a_tempt']
     data.save()
 
 def save_value_sensor(data_sensor):
@@ -33,9 +36,9 @@ def save_value_sensor(data_sensor):
     data.user_id = 1
     data.value_tds = data_sensor['tds']
     data.value_ph = data_sensor['ph']
-    data.value_humidity = data_sensor['humidity']
-    data.value_water_temperature = data_sensor['water_temperature']
-    data.value_air_temperature = data_sensor['air_temperature']
+    data.value_humidity = data_sensor['humid']
+    data.value_water_temperature = data_sensor['w_tempt']
+    data.value_air_temperature = data_sensor['a_tempt']
     data.save()
     
     

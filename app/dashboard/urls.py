@@ -2,10 +2,12 @@
 from app.dashboard.app_views import dashboard
 from django.urls import path, include
 from django.views.generic import TemplateView
+from rest_framework.routers import DefaultRouter
 
 # Application
 from app.dashboard.api import dashboard as api
 from app.dashboard.app_views import dashboard
+
 
 app_name = 'dashboard'
 urlpatterns = [
@@ -24,6 +26,7 @@ urlpatterns = [
             path('setdatacontrol2/', api.SetDataControlStage2.as_view(), name="setdatacontrol2"),
             path('setdatacontrol3/', api.SetDataControlStage3.as_view(), name="setdatacontrol3"),
             path('setdatacontrol4/', api.SetDataControlStage4.as_view(), name="setdatacontrol4"),
+            path('publishaction/', api.PublishControlMessage.as_view(), name="publishaction"),
         ], 'v1'), namespace='v1')),
     ], 'api'), namespace='api')),
     

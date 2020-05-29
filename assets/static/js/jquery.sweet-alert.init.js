@@ -145,7 +145,7 @@ File: Sweet Alerts
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-confirm mt-2',
                 cancelButtonClass: 'btn btn-cancel ml-2 mt-2',
-                confirmButtonText: '<a href="/start-mixin" style="color:white !important"><i class="mdi mdi mdi-check"></i> Aktifkan</a>',
+                confirmButtonText: '<a href="/api/v1/publishaction" style="color:white !important"><i class="mdi mdi mdi-check"></i> Aktifkan</a>',
                 cancelButtonText: '<a href="#" style="color:white !important"><i class="mdi mdi-cancel"></i> Batal</a>'
             })
         });

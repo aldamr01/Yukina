@@ -46,11 +46,11 @@
     </div>
     <div class="row">
         <div class="col-xl-3">
-            {% if current_value.value_water_temperature > config_value.max_water_temperature and current_value.value_water_temperature < config_value.min_water_temperature %}
+            {% if current_value.value_air_temperature > config_value.max_air_temperature or current_value.value_air_temperature < config_value.min_air_temperature %}
                 <div class="card-box gradient-danger bx-shadow-lg">
                     <div class="widget-chart-one-content text-center">
                         <h4 align="left" class="text-white mb-0 mt-2"><strong>Suhu Udara</strong></h4>
-                        <h2 class="text-white">{{ current_value.water_temperature }}°C</h2>
+                        <h2 class="text-white">{{ current_value.value_air_temperature }}°C</h2>
                         <p class="text-white mb-0 mt-2">tidak normal</p>
                     </div>
                 </div> <!-- end card-box-->
@@ -58,7 +58,7 @@
                 <div class="card-box gradient-success bx-shadow-lg">
                     <div class="widget-chart-one-content text-center">
                         <h4 align="left" class="text-white mb-0 mt-2"><strong>Suhu Udara</strong></h4>
-                        <h2 class="text-white">{{ current_value.value_water_temperature }}°C</h2>
+                        <h2 class="text-white">{{ current_value.value_air_temperature }}°C</h2>
                         <p class="text-white mb-0 mt-2">normal</p>
                     </div>
                 </div> <!-- end card-box-->
@@ -68,11 +68,11 @@
 
         <div class="col-xl-3">
 
-            {% if current_value.value_water_temperature > config_value.max_water_temperature and current_value.value_water_temperature < config_value.min_water_temperature %}
+            {% if current_value.value_water_temperature > config_value.max_water_temperature or current_value.value_water_temperature < config_value.min_water_temperature %}
                 <div class="card-box gradient-danger bx-shadow-lg">
                     <div class="widget-chart-one-content text-center">
                         <h4 align="left" class="text-white mb-0 mt-2"><strong>Suhu Air Nutrisi</strong></h4>
-                        <h2 class="text-white">{{ current_value.water_temperature }}°C</h2>
+                        <h2 class="text-white">{{ current_value.value_water_temperature }}°C</h2>
                         <p class="text-white mb-0 mt-2">tidak normal</p>
                     </div>
                 </div> <!-- end card-box-->
@@ -90,11 +90,11 @@
 
         <div class="col-xl-3">
 
-            {% if current_value.value_water_temperature > config_value.max_water_temperature and current_value.value_water_temperature < config_value.min_water_temperature %}
+            {% if current_value.value_ph > config_value.max_ph or current_value.value_ph < config_value.min_ph %}
                 <div class="card-box gradient-danger bx-shadow-lg">
                     <div class="widget-chart-one-content text-center">
                         <h4 align="left" class="text-white mb-0 mt-2"><strong>Keasaman Air</strong></h4>
-                        <h2 class="text-white">{{ current_value.water_temperature }} pH</h2>
+                        <h2 class="text-white">{{ current_value.value_ph }} pH</h2>
                         <p class="text-white mb-0 mt-2">tidak normal</p>
                     </div>
                 </div> <!-- end card-box-->
@@ -102,7 +102,7 @@
                 <div class="card-box gradient-success bx-shadow-lg">
                     <div class="widget-chart-one-content text-center">
                         <h4 align="left" class="text-white mb-0 mt-2"><strong>Keasaman Air</strong></h4>
-                        <h2 class="text-white">{{ current_value.value_water_temperature }} pH</h2>
+                        <h2 class="text-white">{{ current_value.value_ph }} pH</h2>
                         <p class="text-white mb-0 mt-2">normal</p>
                     </div>
                 </div> <!-- end card-box-->
@@ -112,11 +112,11 @@
 
         <div class="col-xl-3">
 
-            {% if current_value.value_tds > config_value.max_tds and current_value.value_tds < config_value.min_tds %}
+            {% if current_value.value_tds > config_value.max_tds or current_value.value_tds < config_value.min_tds %}
                 <div class="card-box gradient-danger bx-shadow-lg">
                     <div class="widget-chart-one-content text-center">
                         <h4 align="left" class="text-white mb-0 mt-2"><strong>Nutrisi Air</strong></h4>
-                        <h2 class="text-white">{{ current_value.tds }} PPM</h2>
+                        <h2 class="text-white">{{ current_value.value_tds }} PPM</h2>
                         <p class="text-white mb-0 mt-2">tidak normal</p>
                     </div>
                 </div> <!-- end card-box-->
@@ -164,11 +164,11 @@
 
         <div class="col-xl-3">
 
-            {% if current_value.value_humidity > config_value.max_humidity and current_value.value_humidity < config_value.min_humidity %}
+            {% if current_value.value_humidity > config_value.max_humidity or current_value.value_humidity < config_value.min_humidity %}
                 <div class="card-box gradient-danger bx-shadow-lg">
                     <div class="widget-chart-one-content text-center">
                         <h4 align="left" class="text-white mb-0 mt-2"><strong>Kelembaban Udara</strong></h4>
-                        <h2 class="text-white">{{ current_value.humidity }}%</h2>
+                        <h2 class="text-white">{{ current_value.value_humidity }}%</h2>
                         <p class="text-white mb-0 mt-2">tidak normal</p>
                     </div>
                 </div> <!-- end card-box-->

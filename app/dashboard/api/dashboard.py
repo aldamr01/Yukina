@@ -1,14 +1,16 @@
 # Django
 from django.shortcuts import get_object_or_404
-
+from django.shortcuts import redirect
 # Library
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+import paho.mqtt.client as mqtt
 
 # Application
 from app.dashboard.app_models.dashboard import SensorCurrentValue, SensorControl, NutrientValue
+
 
 class CurrentSensorValue(APIView):
    permission_classes = (IsAuthenticated,)
@@ -26,6 +28,7 @@ class CurrentSensorValue(APIView):
             }, 
             status = status.HTTP_200_OK
         )
+
 
 class GetDataControl(APIView):
     permission_classes = (IsAuthenticated,)
@@ -113,3 +116,22 @@ class SetDataControlStage4(APIView):
                 }, 
                 status = status.HTTP_200_OK
             )
+            
+
+class PublishControlMessage(APIView):
+    permission_classes = (IsAuthenticated,)
+    client = mqtt.Client()
+    
+    def on_connect(self, userdata, flags, rc):
+        print("Connected with result code "+str(rc))
+
+    def on_message(self, userdata, msg):
+        print(msg.payload.decode("utf-8"))
+
+    def get(self, request, format=None):
+        
+        self.client.on_connect = self.on_connect
+        self.client.on_message = self.on_message
+        self.client.connect("sibadaring.com", 1883, 60)
+        self.client.publish("reina/input", '{"mixin": "on"}', qos=0, retain=False)
+        return redirect('dashboard:garden_control')
